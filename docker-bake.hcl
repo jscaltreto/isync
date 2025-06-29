@@ -5,8 +5,11 @@ group "default" {
 target "docker-metadata-action" {}
 
 target "isync" {
-  context = "."
+  inherits = ["docker-metadata-action"]
+
+  context   = "."
   dockefile = "Dockerfile"
+
   args {
     TAG = ""
   }
