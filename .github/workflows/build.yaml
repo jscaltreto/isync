@@ -44,10 +44,10 @@ jobs:
             type=sha,format=long,prefix=
             type=ref,event=pr
             type=ref,event=branch
-            type=semver,pattern={{version}},value=${{ env.ISYNC_BUILD_TAG }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ env.ISYNC_BUILD_TAG }}
-            type=semver,pattern={{major}},value=${{ env.ISYNC_BUILD_TAG }}
-            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/master' }}
+            type=semver,pattern=v{{version}},value=${{ env.ISYNC_BUILD_TAG }}
+            type=semver,pattern=v{{major}}.{{minor}},value=${{ env.ISYNC_BUILD_TAG }}
+            type=semver,pattern=v{{major}},value=${{ env.ISYNC_BUILD_TAG }}
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
       - name: Build and push Docker image
         uses: docker/bake-action@v4
         with:
