@@ -23,7 +23,7 @@ jobs:
       - name: Read version from versions.txt
         id: get_version
         run: |
-          VERSION_TAG=$(grep "^isync_version=" versions.txt | cut -d'=' -f2)
+          VERSION_TAG=$(grep "^isync_version=" version.txt | cut -d'=' -f2)
           echo "Extracted version: $VERSION_TAG"
           echo "ISYNC_BUILD_TAG=$VERSION_TAG" >> $GITHUB_ENV
       - name: Set up Docker Buildx
@@ -54,6 +54,6 @@ jobs:
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
           files: |-
             docker-bake.hcl
-            ${{ steps.meta.outputs.bake_file }}
+            ${{ steps.meta.outputs.bake-file }}
           set: |-
             *.args.TAG=${{ env.ISYNC_BUILD_TAG }}
