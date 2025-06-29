@@ -8,19 +8,18 @@
       "customType": "regex",
       "fileMatch": ["(^|/)version.txt$"],
       "matchStrings": [
-        "isync_version=(?<currentValue>v\\d+\\.\\d+\\.\\d+)$"
+        "isync_version=(?<currentValue>v\\d+\\.\\d+\\.\\d+)"
       ],
       "datasourceTemplate": "git-tags",
-      "depNameTemplate": "isync/isync",
-      "registryUrlTemplate": "https://git.code.sf.net/p/",
-      "versioningTemplate": "semver"
+      "depNameTemplate": "https://git.code.sf.net/p/isync/isync",
+      "versioningTemplate": "semver",
+      "extractVersionTemplate": "v(?<version>.*)"
     }
   ],
   "packageRules": [
     {
-      "matchDepNames": ["isync/isync"],
+      "matchDepNames": ["https://git.code.sf.net/p/isync/isync"],
       "matchDatasources": ["git-tags"],
-      "extractVersionTemplate": "v(?<version>.*)",
       "automerge": true,
       "automergeType": "branch"
     }
