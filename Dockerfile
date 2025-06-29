@@ -30,14 +30,22 @@ RUN git clone \
 
 FROM debian:bookworm-slim
 
+ARG UID=9000
+ARG GID=9000
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     ca-certificates \
     libdb5.3 \
     libssl3 \
     libsasl2-2 \
-    zlib1g \
-    perl && \
-    rm -rf /var/lib/apt/lists/*
+    zlib1g && \
+    rm -rf /var/lib/apt/lists/* && \
+    groupadd -g ${GID} mbsync && \
+    useradd -u ${UID} -g ${GID} -s /bin/sh -M mbsync
 
 COPY --from=builder /install /usr/local
+
+USER mbsync
+
+ENTRYPOINT ["/usr/local/bin/mbsync"]
