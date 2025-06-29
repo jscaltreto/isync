@@ -41,13 +41,13 @@ jobs:
         with:
           images: ghcr.io/${{ env.IMAGE_NAME }}
           tags: |
-            type=sha,format=long,prefix=
-            type=ref,event=pr
-            type=ref,event=branch
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
             type=semver,pattern=v{{version}},value=${{ env.ISYNC_BUILD_TAG }}
             type=semver,pattern=v{{major}}.{{minor}},value=${{ env.ISYNC_BUILD_TAG }}
             type=semver,pattern=v{{major}},value=${{ env.ISYNC_BUILD_TAG }}
-            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
+            type=sha,format=long,prefix=
+            type=ref,event=pr
+            type=ref,event=branch
       - name: Build and push Docker image
         uses: docker/bake-action@v6
         with:
