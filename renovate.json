@@ -6,7 +6,9 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["(^|/)version.txt$"],
+      "managerFilePatterns": [
+        "/(^|/)version.txt$/"
+      ],
       "matchStrings": [
         "isync_version=(?<currentValue>v\\d+\\.\\d+\\.\\d+)"
       ],
@@ -18,8 +20,12 @@
   ],
   "packageRules": [
     {
-      "matchDepNames": ["https://git.code.sf.net/p/isync/isync"],
-      "matchDatasources": ["git-tags"],
+      "matchDepNames": [
+        "https://git.code.sf.net/p/isync/isync"
+      ],
+      "matchDatasources": [
+        "git-tags"
+      ],
       "automerge": true,
       "automergeType": "branch"
     }
